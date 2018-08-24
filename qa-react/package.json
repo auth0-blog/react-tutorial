@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "auth0-js": "^9.7.3",
     "axios": "^0.18.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
