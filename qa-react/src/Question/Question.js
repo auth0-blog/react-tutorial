@@ -46,13 +46,11 @@ class Question extends Component {
             <hr className="my-4" />
             <SubmitAnswer questionId={question.id} submitAnswer={this.submitAnswer} />
             <p>Answers:</p>
-            <p className="lead">
-              {
-                question.answers.map((answer, idx) => (
-                  <p key={idx}>{answer.answer}</p>
-                ))
-              }
-            </p>
+            {
+              question.answers.map((answer, idx) => (
+                <p className="lead" key={idx}>{answer.answer}</p>
+              ))
+            }
           </div>
         </div>
       </div>
