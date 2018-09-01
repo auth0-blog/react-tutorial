@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
+import auth0Client from './Auth';
 import NavBar from './NavBar/NavBar';
 import Question from './Question/Question';
 import Questions from './Questions/Questions';
@@ -8,6 +9,17 @@ import NewQuestion from './NewQuestion/NewQuestion';
 import SecuredRoute from './SecuredRoute/SecuredRoute';
 
 class App extends Component {
+  async componentDidMount() {
+    if (this.props.location.pathname === '/callback') return;
+    try {
+      await auth0Client.silentAuth();
+      this.forceUpdate();
+    } catch (err) {
+      if (err.error === 'login_required') return;
+      console.log(err.error);
+    }
+  }
+
   render() {
     return (
       <div>
@@ -21,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
