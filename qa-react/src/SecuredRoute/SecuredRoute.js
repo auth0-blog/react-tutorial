@@ -6,7 +6,10 @@ function SecuredRoute(props) {
   const {component: Component, path} = props;
   return (
     <Route path={path} render={() => {
+      console.log('isAuthenticated?');
       if (!auth0Client.isAuthenticated()) {
+        console.log('no, it is not, isAuthenticated');
+        debugger;
         auth0Client.signIn();
         return <div />;
       }
