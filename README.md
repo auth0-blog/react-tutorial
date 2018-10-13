@@ -4,3 +4,25 @@ Application repo accompanying this Auth0 article. In this article, you will lear
 
 [React Tutorial: Building and Securing Your First App](https://auth0.com/blog/react-tutorial-building-and-securing-your-first-app/)
 
+## Running This Sample
+
+To facilitate running this sample, I've left my own Auth0 configuration values in this repo. As such, you can simply run the following commands to run this sample:
+
+```bash
+# after cloning, move into this dir
+cd react-tutorial
+
+# install backend deps
+cd qa-api
+npm i
+
+# run backend on the background
+node index &
+
+# install frontend deps
+cd ../qa-react
+npm i
+
+# run the frontend app
+npm start
+```
