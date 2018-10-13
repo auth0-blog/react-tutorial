@@ -17,7 +17,7 @@ cd qa-api
 npm i
 
 # run backend on the background
-node index &
+node src &
 
 # install frontend deps
 cd ../qa-react
