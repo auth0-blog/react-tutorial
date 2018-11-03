@@ -13,14 +13,14 @@ To facilitate running this sample, I've left my own Auth0 configuration values i
 cd react-tutorial
 
 # install backend deps
-cd qa-api
+cd backend
 npm i
 
 # run backend on the background
 node src &
 
 # install frontend deps
-cd ../qa-react
+cd ../frontend
 npm i
 
 # run the frontend app
