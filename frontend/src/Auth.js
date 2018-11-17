@@ -8,7 +8,7 @@ class Auth {
       audience: 'https://bk-tmp.auth0.com/userinfo',
       clientID: 'PVafIu9Q5QN65DiPByAFvCCJryY7n432',
       redirectUri: 'http://localhost:3000/callback',
-      responseType: 'token id_token',
+      responseType: 'id_token',
       scope: 'openid profile'
     });
 
@@ -48,11 +48,11 @@ class Auth {
     })
   }
 
-  setSession(authResult, step) {
+  setSession(authResult) {
     this.idToken = authResult.idToken;
     this.profile = authResult.idTokenPayload;
     // set the time that the id token will expire at
-    this.expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
+    this.expiresAt = authResult.idTokenPayload.exp * 1000;
   }
 
   signOut() {
