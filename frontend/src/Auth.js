@@ -48,11 +48,11 @@ class Auth {
     })
   }
 
-  setSession(authResult, step) {
+  setSession(authResult) {
     this.idToken = authResult.idToken;
     this.profile = authResult.idTokenPayload;
     // set the time that the id token will expire at
-    this.expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
+    this.expiresAt = authResult.idTokenPayload.exp * 1000;
   }
 
   signOut() {
