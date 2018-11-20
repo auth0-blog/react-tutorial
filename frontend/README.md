@@ -11,8 +11,10 @@ Another alternative is to use Docker to run the app in a container. To do so, yo
 ```bash
 docker build -t react-tutorial .
 
-docker run --name react-tutorial -d -p 80:80 react-tutorial
+docker run --name react-tutorial -d -p 3000:80 react-tutorial
 ```
+
+This will make your app accessible on the following URL: [`http://localhost:3000`].
 
 ## Releasing a new Docker Image
 
@@ -29,5 +31,5 @@ In the code snippet above, you will need to replace `brunokrebs` with your own D
 If you do push a Docker image to [Docker Hub](https://hub.docker.com/), then you can use it like this:
 
 ```bash
-docker run --name react-tutorial -d -p 80:80 brunokrebs/react-tutorial
+docker run --name react-tutorial -d -p 3000:3000 brunokrebs/react-tutorial
 ```
