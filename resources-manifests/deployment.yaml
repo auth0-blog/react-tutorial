@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: react-tutorial
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-tutorial
+  template:
+    metadata:
+      labels:
+        app: react-tutorial
+    spec:
+      containers:
+      - name: react-tutorial-frontend
+        image: brunokrebs/react-tutorial
+        ports:
+        - containerPort: 3000
+      - name: react-tutorial-backend
+        image: brunokrebs/react-tutorial-backend
+        ports:
+        - containerPort: 8081

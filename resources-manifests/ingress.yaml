@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: react-tutorial-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /backend
+        backend:
+          serviceName: react-tutorial-backend-service
+          servicePort: 8081
+      - path: /
+        backend:
+          serviceName: react-tutorial-frontend-service
+          servicePort: 3000
