@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
+const path = require('path');
 
 // define the Express app
 const app = express();
@@ -100,6 +101,12 @@ app.post('/api/answer/:id', checkJwt, (req, res) => {
   });
 
   res.status(200).send();
+});
+
+// making React serve other requests
+app.get('/*', (req, res) => {
+  console.log('howdy!!!!!');
+  res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 // start the server
