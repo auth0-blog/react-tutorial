@@ -1,14 +1,14 @@
 # React Tutorial: Building and Securing Your First App
 
-In this article, you will learn the basic concepts of React while creating a simple Q&A (Questions & Answers) app that relies on a backend API (built with Express). You can find the whole source code for this article in this GitHub repository.
+In this article, you will learn the basic concepts of React while creating a simple Q&A (Questions & Answers) app that relies on a backend API built with Express. You can find the whole source code developed throughout the article in this GitHub repository.
 
-Read more:
+Read more at:
 
 [React Tutorial: Building and Securing Your First App](https://auth0.com/blog/react-tutorial-building-and-securing-your-first-app/)
 
 ## Running This Sample
 
-To facilitate running this sample, I've left my own Auth0 configuration values in this repo. As such, you can simply run the following commands to run this sample:
+To facilitate running this sample, I've left my own Auth0 configuration values in this repo. As such, you can simply run the following commands to run the sample application:
 
 ```bash
 export REACT_APP_AUTH0_DOMAIN=bk-tmp.auth0.com
