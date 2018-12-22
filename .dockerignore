@@ -1,2 +1,11 @@
+# development Node.js files/dirs
 node_modules
 npm-debug.log
+
+# Kubernetes resources
+resources-manifests
+
+# ignore React public and src directories
+# we use the build direct instead
+public
+src

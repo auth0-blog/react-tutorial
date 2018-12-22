@@ -23,3 +23,23 @@ npm start
 ```
 
 The first four environment variables, `REACT_APP_AUTH0_*`, are used by the React application. The last two, `AUTH0_DOMAIN` and `AUTH0_API_IDENTIFIER`, are used by the backend API.
+
+### Running with Docker
+
+```bash
+export REACT_APP_AUTH0_DOMAIN=bk-tmp.auth0.com
+export REACT_APP_AUTH0_AUDIENCE=https://bk-tmp.auth0.com/userinfo
+export REACT_APP_AUTH0_CLIENT_ID=PVafIu9Q5QN65DiPByAFvCCJryY7n432
+export REACT_APP_AUTH0_REDIRECT_URI=http://localhost:3000/callback
+
+npm run build
+
+docker build \
+  --build-arg AUTH0_DOMAIN=$REACT_APP_AUTH0_DOMAIN \
+  --build-arg AUTH0_API_IDENTIFIER=$REACT_APP_AUTH0_CLIENT_ID \
+  -t react-tutorial .
+  
+d rm -f react-tutorial
+
+docker run --name react-tutorial -d -p 3000:3001 react-tutorial
+```

@@ -10,6 +10,9 @@ const jwksRsa = require('jwks-rsa');
 // define the Express app
 const app = express();
 
+console.log('AUTH0_API_IDENTIFIER: ' + process.env.AUTH0_API_IDENTIFIER);
+console.log('AUTH0_DOMAIN: ' + process.env.AUTH0_DOMAIN);
+
 // the database
 const questions = [{
   id: 1,
@@ -101,5 +104,5 @@ app.post('/api/answer/:id', checkJwt, (req, res) => {
 
 // start the server
 app.listen(3001, () => {
-  console.log('listening on port 3001');
+  console.log('listening on container port 3001');
 });
