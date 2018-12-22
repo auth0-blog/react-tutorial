@@ -34,7 +34,7 @@ kubectl get svc \
 
 Then, you can copy the IP printed in your terminal and paste it on a web browser.
 
-> **Note:** Your service provider might need a few minutes to spin a load balancer for you.
+> **Note:** If the command above outputs nothing, this means that your service provider is still spinning a load balancer for you.
 
 ## Cleaning Up
 
