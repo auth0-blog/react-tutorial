@@ -100,6 +100,6 @@ app.post('/api/answer/:id', checkJwt, (req, res) => {
 });
 
 // start the server
-app.listen(80, () => {
-  console.log('listening on port 80');
+app.listen(3001, () => {
+  console.log('listening on port 3001');
 });
