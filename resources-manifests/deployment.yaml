@@ -15,9 +15,7 @@ spec:
       containers:
       - name: react-tutorial-frontend
         image: brunokrebs/react-tutorial
+#        uncomment if you need to refresh image on k8s
+#        imagePullPolicy: Always
         ports:
-        - containerPort: 3000
-      - name: react-tutorial-backend
-        image: brunokrebs/react-tutorial-backend
-        ports:
-        - containerPort: 8081
+        - containerPort: 3001
