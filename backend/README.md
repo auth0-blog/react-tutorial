@@ -4,12 +4,23 @@
 
 ## Running the Application
 
-The easiest way to run this application is to issue `node src` from a terminal pointing to this directory. This command, as you may know, requires Node.js and NPM installed locally. If you don't have those, [you can install them in a few minutes](https://nodejs.org/en/download/).
+The easiest way to run this application is to issue the following commands from a terminal pointing to this directory:
+
+```bash
+export AUTH0_DOMAIN=bk-tmp.auth0.com
+export AUTH0_API_IDENTIFIER=PVafIu9Q5QN65DiPByAFvCCJryY7n432
+node src
+```
+
+This command, as you may know, requires Node.js and NPM installed locally. If you don't have those, [you can install them in a few minutes](https://nodejs.org/en/download/).
 
 Another alternative is to use Docker to run the app in a container. To do so, you can issue the following commands:
 
 ```bash
-docker build -t react-tutorial-backend .
+docker build \
+  --build-arg AUTH0_DOMAIN=bk-tmp.auth0.com \
+  --build-arg AUTH0_API_IDENTIFIER=PVafIu9Q5QN65DiPByAFvCCJryY7n432 \
+  -t react-tutorial-backend .
 
 docker run --name react-tutorial-backend -d -p 8081:8081 react-tutorial-backend
 ```
@@ -21,9 +32,12 @@ This will make your API accessible on the following URL: [`http://localhost:8081
 Make sure you are currently logged into Docker and then issue the following commands:
 
 ```bash
-docker build -t brunokrebs/react-tutorial-backend .
+docker build \
+  --build-arg AUTH0_DOMAIN=bk-tmp.auth0.com \
+  --build-arg AUTH0_API_IDENTIFIER=PVafIu9Q5QN65DiPByAFvCCJryY7n432 \
+  -t brunokrebs/react-tutorial-backend:debug-4 .
 
-docker push brunokrebs/react-tutorial-backend
+docker push brunokrebs/react-tutorial-backend:debug-4
 ```
 
 In the code snippet above, you will need to replace `brunokrebs` with your own Docker username (unless you are me 😊).
@@ -31,5 +45,5 @@ In the code snippet above, you will need to replace `brunokrebs` with your own D
 If you do push a Docker image to [Docker Hub](https://hub.docker.com/), then you can use it like this:
 
 ```bash
-docker run --name react-tutorial-backend -d -p 8081:8081 brunokrebs/react-tutorial-backend
+docker run --name react-tutorial-backend -d -p 8081:8081 brunokrebs/react-tutorial-backend:debug-4
 ```

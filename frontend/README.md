@@ -42,9 +42,9 @@ docker build \
   --build-arg REACT_APP_AUTH0_AUDIENCE=https://bk-tmp.auth0.com/userinfo \
   --build-arg REACT_APP_AUTH0_CLIENT_ID=PVafIu9Q5QN65DiPByAFvCCJryY7n432 \
   --build-arg REACT_APP_AUTH0_REDIRECT_URI=http://localhost:3000/callback \
-  -t brunokrebs/react-tutorial .
+  -t brunokrebs/react-tutorial:debug-1 .
 
-docker push brunokrebs/react-tutorial
+docker push brunokrebs/react-tutorial:debug-1
 ```
 
 In the code snippet above, you will need to replace `brunokrebs` with your own Docker username (unless you are me 😊).
@@ -52,5 +52,5 @@ In the code snippet above, you will need to replace `brunokrebs` with your own D
 If you do push a Docker image to [Docker Hub](https://hub.docker.com/), then you can use it like this:
 
 ```bash
-docker run --name react-tutorial -d -p 3000:80 brunokrebs/react-tutorial
+docker run --name react-tutorial -d -p 80:80 brunokrebs/react-tutorial:debug-1
 ```

@@ -4,6 +4,10 @@ FROM node:10.13
 # Create app directory
 WORKDIR /usr/src/app
 
+# env variables
+ARG AUTH0_DOMAIN
+ARG AUTH0_API_IDENTIFIER
+
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
@@ -16,5 +20,5 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 8081
+EXPOSE 80
 CMD [ "node", "src" ]
