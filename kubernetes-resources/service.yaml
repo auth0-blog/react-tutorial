@@ -1,13 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-tutorial-service
+  name: react-tutorial
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  react-tutorial-mapping
+      prefix: /
+      service: react-tutorial
 spec:
-  type: NodePort
-  ports:
-  - port: 3001
-    targetPort: 3001
-    protocol: TCP
-    name: frontend-port
   selector:
     app: react-tutorial
+  ports:
+    - port: 80
+      name: http-react-service
+      targetPort: http-react
