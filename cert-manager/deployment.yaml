@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: react-tutorial
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: react-tutorial
+    spec:
+      containers:
+        - image: brunokrebs/react-tutorial
+          imagePullPolicy: Always
+          name: react-tutorial
+          ports:
+            - containerPort: 3001

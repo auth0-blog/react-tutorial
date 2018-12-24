@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: react-tutorial
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    certmanager.k8s.io/issuer: "letsencrypt-prod"
+    certmanager.k8s.io/acme-challenge-type: http01
+
+spec:
+  tls:
+    - hosts:
+        - brunokrebs.com
+      secretName: react-tutorial-tls
+  rules:
+    - host: brunokrebs.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: react-tutorial
+              servicePort: 80
