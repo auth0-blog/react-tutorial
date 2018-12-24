@@ -23,9 +23,9 @@ kubectl apply -f production-issuer.yaml
 
 kubectl apply -f ingress-tls.yaml
 
-kubectl describe certificate quickstart-example-tls
+kubectl describe certificate react-tutorial-tls
 
 kubectl apply -f ingress-tls-final.yaml
 
-kubectl delete secret quickstart-example-tls
+kubectl delete secret react-tutorial-tls
 ```

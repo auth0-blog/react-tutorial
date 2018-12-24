@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kuard
+  name: react-tutorial
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: kuard
+        app: react-tutorial
     spec:
       containers:
-        - image: gcr.io/kuar-demo/kuard-amd64:1
+        - image: brunokrebs/react-tutorial
           imagePullPolicy: Always
-          name: kuard
+          name: react-tutorial
           ports:
-            - containerPort: 8080
+            - containerPort: 3001
