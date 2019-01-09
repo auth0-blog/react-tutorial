@@ -9,11 +9,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /backend
-        backend:
-          serviceName: react-tutorial-backend-service
-          servicePort: 8081
       - path: /
         backend:
-          serviceName: react-tutorial-frontend-service
-          servicePort: 3000
+          serviceName: react-tutorial-service
+          servicePort: 3001

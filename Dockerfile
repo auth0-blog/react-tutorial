@@ -4,6 +4,14 @@ FROM node:10.13
 # Create app directory
 WORKDIR /usr/src/app
 
+# getting env variables on build
+ARG AUTH0_DOMAIN
+ARG AUTH0_API_IDENTIFIER
+
+# passing to container
+ENV AUTH0_DOMAIN=$AUTH0_DOMAIN
+ENV AUTH0_API_IDENTIFIER=$AUTH0_API_IDENTIFIER
+
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
@@ -14,7 +22,8 @@ RUN npm install
 # RUN npm install --only=production
 
 # Bundle app source
-COPY . .
+COPY server.js .
+COPY ./build ./public
 
-EXPOSE 8081
-CMD [ "node", "src" ]
+EXPOSE 3001
+CMD [ "node", "server" ]
