@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import auth0Client from '../Auth';
+import {getProfile, isAuthenticated, signIn, signOut} from '../NewAuth';
 
-function NavBar(props) {
-  const signOut = () => {
-    auth0Client.signOut();
-    props.history.replace('/');
-  };
+function NavBar() {
+  const [profile, setProfile] = useState(null);
+  const [authenticated, setAuthenticated] = useState(null);
+
+  useEffect(() => {
+    async function loadProfile() {
+      setProfile(await getProfile());
+      setAuthenticated(await isAuthenticated());
+    }
+    loadProfile();
+  });
 
   return (
     <nav className="navbar navbar-dark bg-primary fixed-top">
@@ -14,14 +20,12 @@ function NavBar(props) {
         Q&App
       </Link>
       {
-        !auth0Client.isAuthenticated() &&
-        <button className="btn btn-dark" onClick={auth0Client.signIn}>Sign In</button>
+        !authenticated && <button className="btn btn-dark" onClick={async () => {await signIn()}}>Sign In</button>
       }
       {
-        auth0Client.isAuthenticated() &&
-        <div>
-          <label className="mr-2 text-white">{auth0Client.getProfile().name}</label>
-          <button className="btn btn-dark" onClick={() => {signOut()}}>Sign Out</button>
+        authenticated && <div>
+          <label className="mr-2 text-white">{profile.name}</label>
+          <button className="btn btn-dark" onClick={signOut}>Sign Out</button>
         </div>
       }
     </nav>

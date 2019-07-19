@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, withRouter} from 'react-router-dom';
-import auth0Client from './Auth';
+import {initialize, silentAuth} from './NewAuth';
 import NavBar from './NavBar/NavBar';
 import Question from './Question/Question';
 import Questions from './Questions/Questions';
@@ -12,17 +12,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       checkingSession: true,
     }
   }
 
   async componentDidMount() {
+    await initialize();
+    this.setState({loading: false});
+
     if (this.props.location.pathname === '/callback') {
-      this.setState({checkingSession:false});
+      this.setState({checkingSession: false});
       return;
     }
     try {
-      await auth0Client.silentAuth();
+      await silentAuth();
       this.forceUpdate();
     } catch (err) {
       if (err.error !== 'login_required') console.log(err.error);
@@ -31,6 +35,7 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.loading) return <div>Loading...</div>;
     return (
       <div>
         <NavBar/>

@@ -1,13 +1,21 @@
 import React, {Component, Fragment} from 'react';
 import {withRouter} from 'react-router-dom';
-import auth0Client from '../Auth';
+import {isAuthenticated} from '../NewAuth';
 
 class SubmitAnswer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       answer: '',
+      authenticated: null,
     };
+  }
+
+  async componentDidMount() {
+    const authenticated = await isAuthenticated();
+    this.setState({
+      authenticated,
+    });
   }
 
   updateAnswer(value) {
@@ -25,7 +33,7 @@ class SubmitAnswer extends Component {
   }
 
   render() {
-    if (!auth0Client.isAuthenticated()) return null;
+    if (!this.state.authenticated) return null;
     return (
       <Fragment>
         <div className="form-group text-center">

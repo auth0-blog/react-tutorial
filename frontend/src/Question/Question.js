@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import SubmitAnswer from './SubmitAnswer';
-import auth0Client from '../Auth';
+import {getIdToken} from '../NewAuth';
 
 class Question extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class Question extends Component {
     await axios.post(`http://localhost:8081/answer/${this.state.question.id}`, {
       answer,
     }, {
-      headers: { 'Authorization': `Bearer ${auth0Client.getIdToken()}` }
+      headers: { 'Authorization': `Bearer ${getIdToken()}` }
     });
     await this.refreshQuestion();
   }
