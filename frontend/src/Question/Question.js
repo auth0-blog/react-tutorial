@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import SubmitAnswer from './SubmitAnswer';
-import {getIdToken} from '../NewAuth';
+import {getIdToken} from '../Auth';
 
 class Question extends Component {
   constructor(props) {

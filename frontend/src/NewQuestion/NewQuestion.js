@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {getIdToken} from '../NewAuth';
+import {getIdToken} from '../Auth';
 import axios from 'axios';
 
 class NewQuestion extends Component {

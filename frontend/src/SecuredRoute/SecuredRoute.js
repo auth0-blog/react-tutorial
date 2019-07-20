@@ -1,27 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import {Route} from 'react-router-dom';
-import {isAuthenticated, signIn} from '../NewAuth';
+import {isAuthenticated, signIn} from '../Auth';
 
-function SecuredRoute(props) {
+function GatedComponent(props) {
   const [authenticated, setAuthenticated] = useState(null);
+
+  const {component: Component, checkingSession} = props;
 
   useEffect(() => {
     async function checkAuthenticationStatus() {
-      setAuthenticated(await isAuthenticated());
+      const isAuth = await isAuthenticated();
+      if (!isAuth) await signIn();
+      setAuthenticated(isAuth);
     }
     checkAuthenticationStatus();
   });
 
-  const {component: Component, path, checkingSession} = props;
+  if (checkingSession || !authenticated) return <h3 className="text-center">Validating session...</h3>;
+  return <Component />
+}
+
+function SecuredRoute(props) {
+  const {component, path} = props;
   return (
-    <Route path={path} render={() => {
-      if (checkingSession) return <h3 className="text-center">Validating session...</h3>;
-      if (!authenticated) {
-        signIn();
-        return <div></div>;
-      }
-      return <Component />
-    }} />
+    <Route path={path} render={() => <GatedComponent component={component} />} />
   );
 }
 

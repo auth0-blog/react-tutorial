@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {getProfile, isAuthenticated, signIn, signOut} from '../NewAuth';
+import {getProfile, isAuthenticated, signIn, signOut} from '../Auth';
 
 function NavBar() {
   const [profile, setProfile] = useState(null);

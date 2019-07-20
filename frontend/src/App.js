@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, withRouter} from 'react-router-dom';
-import {initialize, silentAuth} from './NewAuth';
+import {initialize, silentAuth} from './Auth';
 import NavBar from './NavBar/NavBar';
 import Question from './Question/Question';
 import Questions from './Questions/Questions';

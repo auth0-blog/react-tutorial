@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {withRouter} from 'react-router-dom';
-import {isAuthenticated} from '../NewAuth';
+import {isAuthenticated} from '../Auth';
 
 class SubmitAnswer extends Component {
   constructor(props) {
