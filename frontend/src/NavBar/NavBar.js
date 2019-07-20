@@ -17,7 +17,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-dark bg-primary fixed-top">
       <Link className="navbar-brand" to="/">
-        Q&App
+        TroubleShoo
       </Link>
       {
         !authenticated && <button className="btn btn-dark" onClick={async () => {await signIn()}}>Sign In</button>
