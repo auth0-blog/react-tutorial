@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {getIdToken} from '../Auth';
+import {getVacationsAccessToken} from '../Auth';
 import axios from 'axios';
 
-class NewQuestion extends Component {
+class VacationRequest extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       disabled: false,
       title: '',
-      description: '',
+      days: '',
     };
   }
 
-  updateDescription(value) {
+  updateDays(value) {
     this.setState({
-      description: value,
+      days: value,
     });
   }
 
@@ -31,14 +31,16 @@ class NewQuestion extends Component {
       disabled: true,
     });
 
-    await axios.post('http://localhost:8081', {
+    const accessToken = await getVacationsAccessToken();
+
+    await axios.post('http://localhost:3001/vacations', {
       title: this.state.title,
-      description: this.state.description,
+      days: this.state.days,
     }, {
-      headers: { 'Authorization': `Bearer ${getIdToken()}` }
+      headers: { 'Authorization': `Bearer ${accessToken}` }
     });
 
-    this.props.history.push('/');
+    this.props.history.push('/vacations');
   }
 
   render() {
@@ -47,7 +49,7 @@ class NewQuestion extends Component {
         <div className="row">
           <div className="col-12">
             <div className="card border-primary">
-              <div className="card-header">New Question</div>
+              <div className="card-header">New Vacation Request</div>
               <div className="card-body text-left">
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Title:</label>
@@ -56,17 +58,17 @@ class NewQuestion extends Component {
                     type="text"
                     onBlur={(e) => {this.updateTitle(e.target.value)}}
                     className="form-control"
-                    placeholder="Give your question a title."
+                    placeholder="Give your request a title."
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">Description:</label>
+                  <label htmlFor="exampleInputEmail1">Days off:</label>
                   <input
                     disabled={this.state.disabled}
                     type="text"
-                    onBlur={(e) => {this.updateDescription(e.target.value)}}
+                    onBlur={(e) => {this.updateDays(e.target.value)}}
                     className="form-control"
-                    placeholder="Give more context to your question."
+                    placeholder="How many days off do you need?"
                   />
                 </div>
                 <button
@@ -84,4 +86,4 @@ class NewQuestion extends Component {
   }
 }
 
-export default withRouter(NewQuestion);
+export default withRouter(VacationRequest);

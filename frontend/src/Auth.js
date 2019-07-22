@@ -10,12 +10,26 @@ async function initialize() {
   });
 }
 
+async function getExpensesAccessToken() {
+  return await auth0.getTokenSilently({
+    audience: 'https://expense-api.troubleshoo.com'
+  });
+}
+
+async function getInvoicesAccessToken() {
+  return await auth0.getTokenSilently({
+    audience: 'https://invoice-api.troubleshoo.com'
+  });
+}
+
 async function getProfile() {
   return await auth0.getUser();
 }
 
-function getIdToken() {
-  // todo
+async function getVacationsAccessToken() {
+  return await auth0.getTokenSilently({
+    audience: 'https://vacation-api.troubleshoo.com'
+  });
 }
 
 async function isAuthenticated() {
@@ -42,8 +56,10 @@ async function silentAuth() {
 
 export {
   initialize,
+  getExpensesAccessToken,
+  getInvoicesAccessToken,
   getProfile,
-  getIdToken,
+  getVacationsAccessToken,
   isAuthenticated,
   signIn,
   handleAuthentication,
