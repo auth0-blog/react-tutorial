@@ -12,7 +12,15 @@ async function initialize() {
 
 async function getExpensesAccessToken() {
   return await auth0.getTokenSilently({
-    audience: 'https://expense-api.troubleshoo.com'
+    audience: 'https://expense-api.troubleshoo.com',
+    scope: 'create:expense submit:expense',
+  });
+}
+
+async function getExpensesConsent() {
+  return await auth0.getTokenWithPopup({
+    audience: 'https://expense-api.troubleshoo.com',
+    scope: 'create:expense submit:expense',
   });
 }
 
@@ -57,6 +65,7 @@ async function silentAuth() {
 export {
   initialize,
   getExpensesAccessToken,
+  getExpensesConsent,
   getInvoicesAccessToken,
   getProfile,
   getVacationsAccessToken,

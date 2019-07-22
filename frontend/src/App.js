@@ -4,6 +4,10 @@ import {initialize, silentAuth} from './Auth';
 import Dashboard from './Dashboard/Dashboard';
 import NavBar from './NavBar/NavBar';
 import Callback from './Callback';
+import ExpenseReport from './Expenses/ExpenseReport';
+import ExpenseReports from './Expenses/ExpenseReports';
+import InvoiceReport from './Invoices/InvoiceReport';
+import InvoiceReports from './Invoices/InvoiceReports';
 import VacationRequest from './Vacations/VacationRequest';
 import VacationRequests from './Vacations/VacationRequests';
 
@@ -39,6 +43,10 @@ class App extends Component {
       <div>
         <NavBar/>
         <Route exact path='/' component={Dashboard}/>
+        <Route exact path='/expenses' component={ExpenseReports}/>
+        <Route exact path='/expenses/new-report' component={ExpenseReport}/>
+        <Route exact path='/invoices' component={InvoiceReports}/>
+        <Route exact path='/invoices/new-report' component={InvoiceReport}/>
         <Route exact path='/vacations' component={VacationRequests}/>
         <Route exact path='/vacations/new-request' component={VacationRequest}/>
         <Route exact path='/callback' component={Callback}/>
