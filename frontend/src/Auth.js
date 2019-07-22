@@ -13,28 +13,28 @@ async function initialize() {
 async function getExpensesAccessToken() {
   return await auth0.getTokenSilently({
     audience: 'https://expense-api.troubleshoo.com',
-    scope: 'create:expense submit:expense',
+    scope: 'read:reports create:report ',
   });
 }
 
 async function getExpensesConsent() {
   return await auth0.getTokenWithPopup({
     audience: 'https://expense-api.troubleshoo.com',
-    scope: 'create:expense submit:expense',
+    scope: 'read:reports create:report ',
   });
 }
 
 async function getInvoicesAccessToken() {
   return await auth0.getTokenSilently({
     audience: 'https://invoice-api.troubleshoo.com',
-    scope: 'create:invoice submit:invoice',
+    scope: 'read:invoices create:invoice',
   });
 }
 
 async function getInvoicesConsent() {
   return await auth0.getTokenWithPopup({
     audience: 'https://invoice-api.troubleshoo.com',
-    scope: 'create:invoice submit:invoice',
+    scope: 'read:invoices create:invoice',
   });
 }
 
@@ -44,14 +44,15 @@ async function getProfile() {
 
 async function getVacationsAccessToken() {
   return await auth0.getTokenSilently({
-    audience: 'https://vacation-api.troubleshoo.com'
+    audience: 'https://vacation-api.troubleshoo.com',
+    scope: 'read:requests create:request',
   });
 }
 
 async function getVacationsConsent() {
   return await auth0.getTokenWithPopup({
     audience: 'https://vacation-api.troubleshoo.com',
-    scope: 'create:vacation submit:vacation',
+    scope: 'read:requests create:request',
   });
 }
 
