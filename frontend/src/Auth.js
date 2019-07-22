@@ -26,7 +26,15 @@ async function getExpensesConsent() {
 
 async function getInvoicesAccessToken() {
   return await auth0.getTokenSilently({
-    audience: 'https://invoice-api.troubleshoo.com'
+    audience: 'https://invoice-api.troubleshoo.com',
+    scope: 'create:invoice submit:invoice',
+  });
+}
+
+async function getInvoicesConsent() {
+  return await auth0.getTokenWithPopup({
+    audience: 'https://invoice-api.troubleshoo.com',
+    scope: 'create:invoice submit:invoice',
   });
 }
 
@@ -37,6 +45,13 @@ async function getProfile() {
 async function getVacationsAccessToken() {
   return await auth0.getTokenSilently({
     audience: 'https://vacation-api.troubleshoo.com'
+  });
+}
+
+async function getVacationsConsent() {
+  return await auth0.getTokenWithPopup({
+    audience: 'https://vacation-api.troubleshoo.com',
+    scope: 'create:vacation submit:vacation',
   });
 }
 
@@ -67,8 +82,10 @@ export {
   getExpensesAccessToken,
   getExpensesConsent,
   getInvoicesAccessToken,
+  getInvoicesConsent,
   getProfile,
   getVacationsAccessToken,
+  getVacationsConsent,
   isAuthenticated,
   signIn,
   handleAuthentication,

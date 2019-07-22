@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import {getVacationsAccessToken} from "../Auth";
+import {getVacationsAccessToken, getVacationsConsent} from '../Auth';
 
 class VacationRequests extends Component {
   constructor(props) {
@@ -9,12 +9,11 @@ class VacationRequests extends Component {
 
     this.state = {
       vacationRequests: null,
+      consentNeeded: false,
     };
   }
 
-  async componentDidMount() {
-    const accessToken = await getVacationsAccessToken();
-
+  async fetchVacations(accessToken) {
     const response = await axios.get('http://localhost:3001/vacations', {
       headers: { 'Authorization': `Bearer ${accessToken}` }
     });
@@ -22,10 +21,49 @@ class VacationRequests extends Component {
     const vacationRequests = response.data;
     this.setState({
       vacationRequests,
+      consentNeeded: false,
     });
   }
 
+  async authorizeApplication() {
+    try {
+      const accessToken = await getVacationsConsent();
+      await this.fetchVacations(accessToken);
+    } catch (err) {
+      alert('Error while trying to fetch vacations. Check logs.');
+      console.log(err);
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      const accessToken = await getVacationsAccessToken();
+      await this.fetchVacations(accessToken);
+    } catch (err) {
+      if (err.error === 'consent_required') {
+        this.setState({
+          consentNeeded: true,
+        });
+        return;
+      }
+      alert('Error while trying to fetch vacations. Check logs.');
+      console.log(err);
+    }
+  }
+
   render() {
+    if (this.state.consentNeeded) return (
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <p>To be able to consume your vacations, this application needs your express consent.</p>
+            <button className="btn btn-primary" onClick={async () => (await this.authorizeApplication())}>
+              Authorize application
+            </button>
+          </div>
+        </div>
+      </div>
+    );
     return (
       <div className="container">
         <div className="row">
@@ -39,7 +77,7 @@ class VacationRequests extends Component {
               <thead className="thead-dark">
               <tr>
                 <th>Description</th>
-                <th>Days off</th>
+                <th>Days Off</th>
               </tr>
               </thead>
               <tbody>

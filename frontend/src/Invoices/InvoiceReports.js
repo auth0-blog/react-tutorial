@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import {getInvoicesAccessToken} from '../Auth';
+import {getInvoicesAccessToken, getInvoicesConsent} from '../Auth';
 
 class InvoiceReports extends Component {
   constructor(props) {
@@ -9,12 +9,11 @@ class InvoiceReports extends Component {
 
     this.state = {
       invoiceReports: null,
+      consentNeeded: false,
     };
   }
 
-  async componentDidMount() {
-    const accessToken = await getInvoicesAccessToken();
-
+  async fetchInvoices(accessToken) {
     const response = await axios.get('http://localhost:3001/invoices', {
       headers: { 'Authorization': `Bearer ${accessToken}` }
     });
@@ -22,10 +21,49 @@ class InvoiceReports extends Component {
     const invoiceReports = response.data;
     this.setState({
       invoiceReports,
+      consentNeeded: false,
     });
   }
 
+  async authorizeApplication() {
+    try {
+      const accessToken = await getInvoicesConsent();
+      await this.fetchInvoices(accessToken);
+    } catch (err) {
+      alert('Error while trying to fetch invoices. Check logs.');
+      console.log(err);
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      const accessToken = await getInvoicesAccessToken();
+      await this.fetchInvoices(accessToken);
+    } catch (err) {
+      if (err.error === 'consent_required') {
+        this.setState({
+          consentNeeded: true,
+        });
+        return;
+      }
+      alert('Error while trying to fetch invoices. Check logs.');
+      console.log(err);
+    }
+  }
+
   render() {
+    if (this.state.consentNeeded) return (
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <p>To be able to consume your invoices, this application needs your express consent.</p>
+            <button className="btn btn-primary" onClick={async () => (await this.authorizeApplication())}>
+              Authorize application
+            </button>
+          </div>
+        </div>
+      </div>
+    );
     return (
       <div className="container">
         <div className="row">

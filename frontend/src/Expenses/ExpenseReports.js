@@ -21,6 +21,7 @@ class ExpenseReports extends Component {
     const expenseReports = response.data;
     this.setState({
       expenseReports,
+      consentNeeded: false,
     });
   }
 
