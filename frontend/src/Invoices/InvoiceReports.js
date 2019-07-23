@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {getInvoicesAccessToken, getInvoicesConsent} from '../Auth';
+import {getAPIUrl} from '../Config';
 
 class InvoiceReports extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class InvoiceReports extends Component {
   }
 
   async fetchInvoices(accessToken) {
-    const response = await axios.get('http://localhost:3001/invoices', {
+    const response = await axios.get(`${getAPIUrl()}/invoices`, {
       headers: { 'Authorization': `Bearer ${accessToken}` }
     });
 

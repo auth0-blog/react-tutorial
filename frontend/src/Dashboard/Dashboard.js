@@ -44,6 +44,19 @@ function Dashboard() {
             </div>
           </Link>
         </div>
+        <div className="col-sm-12 col-md-4 col-lg-3">
+          <Link to="/config">
+            <div className="card text-white bg-primary mb-3">
+              <div className="card-header">Change the app config.</div>
+              <div className="card-body">
+                <h4 className="card-title">
+                  + Config
+                </h4>
+                <p className="card-text">Useful for testing.</p>
+              </div>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   )

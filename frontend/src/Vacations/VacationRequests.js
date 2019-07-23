@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {getVacationsAccessToken, getVacationsConsent} from '../Auth';
+import {getAPIUrl} from '../Config';
 
 class VacationRequests extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class VacationRequests extends Component {
   }
 
   async fetchVacations(accessToken) {
-    const response = await axios.get('http://localhost:3001/vacations', {
+    const response = await axios.get(`${getAPIUrl()}/vacations`, {
       headers: { 'Authorization': `Bearer ${accessToken}` }
     });
 

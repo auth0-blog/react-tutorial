@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {getExpensesAccessToken, getExpensesConsent} from '../Auth';
+import {getAPIUrl} from '../Config';
 
 class ExpenseReports extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class ExpenseReports extends Component {
   }
 
   async fetchExpenses(accessToken) {
-    const response = await axios.get('http://localhost:3001/expenses', {
+    const response = await axios.get(`${getAPIUrl()}/expenses`, {
       headers: { 'Authorization': `Bearer ${accessToken}` }
     });
 

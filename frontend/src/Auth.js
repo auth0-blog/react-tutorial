@@ -1,39 +1,48 @@
 import createAuth0Client from '@auth0/auth0-spa-js';
+import {
+  getCallbackUrl,
+  getClientId,
+  getDomain,
+  getConnection,
+  getExpenseAPIAudience,
+  getInvoiceAPIAudience,
+  getVacationAPIAudience,
+} from './Config';
 
 let auth0;
 
 async function initialize() {
   auth0 = await createAuth0Client({
-    domain: 'rbac-and-groups.auth0.com',
-    client_id: '37QIIN7b5vJCbvN65hz5WACofGxchInE',
-    redirect_uri: 'http://localhost:3000/callback'
+    domain: getDomain(),
+    client_id: getClientId(),
+    redirect_uri: getCallbackUrl()
   });
 }
 
 async function getExpensesAccessToken() {
   return await auth0.getTokenSilently({
-    audience: 'https://expense-api.troubleshoo.com',
+    audience: getExpenseAPIAudience(),
     scope: 'read:expenses create:expenses'
   });
 }
 
 async function getExpensesConsent() {
   return await auth0.getTokenWithPopup({
-    audience: 'https://expense-api.troubleshoo.com',
+    audience: getExpenseAPIAudience(),
     scope: 'read:expenses create:expenses'
   });
 }
 
 async function getInvoicesAccessToken() {
   return await auth0.getTokenSilently({
-    audience: 'https://invoice-api.troubleshoo.com',
+    audience: getInvoiceAPIAudience(),
     scope: 'read:invoices create:invoices',
   });
 }
 
 async function getInvoicesConsent() {
   return await auth0.getTokenWithPopup({
-    audience: 'https://invoice-api.troubleshoo.com',
+    audience: getInvoiceAPIAudience(),
     scope: 'read:invoices create:invoices',
   });
 }
@@ -44,14 +53,14 @@ async function getProfile() {
 
 async function getVacationsAccessToken() {
   return await auth0.getTokenSilently({
-    audience: 'https://vacation-api.troubleshoo.com',
+    audience: getVacationAPIAudience(),
     scope: 'read:vacations create:vacations',
   });
 }
 
 async function getVacationsConsent() {
   return await auth0.getTokenWithPopup({
-    audience: 'https://vacation-api.troubleshoo.com',
+    audience: getVacationAPIAudience(),
     scope: 'read:vacations create:vacations',
   });
 }
@@ -62,7 +71,7 @@ async function isAuthenticated() {
 
 async function signIn() {
   await auth0.loginWithRedirect({
-    connection: 'Username-Password-Authentication'
+    connection: getConnection()
   });
 }
 

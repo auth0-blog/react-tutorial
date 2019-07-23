@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {getVacationsAccessToken} from '../Auth';
+import {getAPIUrl} from '../Config';
 import axios from 'axios';
 
 class VacationRequest extends Component {
@@ -33,7 +34,7 @@ class VacationRequest extends Component {
 
     const accessToken = await getVacationsAccessToken();
 
-    await axios.post('http://localhost:3001/vacations', {
+    await axios.post(`${getAPIUrl()}/vacations`, {
       title: this.state.title,
       days: this.state.days,
     }, {

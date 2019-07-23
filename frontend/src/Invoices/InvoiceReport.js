@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {getInvoicesAccessToken} from '../Auth';
 import axios from 'axios';
+import {getAPIUrl} from '../Config';
 
 class InvoiceReport extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class InvoiceReport extends Component {
 
     const accessToken = await getInvoicesAccessToken();
 
-    await axios.post('http://localhost:3001/invoices', {
+    await axios.post(`${getAPIUrl()}/invoices`, {
       title: this.state.title,
       amount: this.state.amount,
     }, {

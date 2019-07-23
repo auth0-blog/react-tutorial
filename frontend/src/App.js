@@ -3,6 +3,7 @@ import {Route, withRouter} from 'react-router-dom';
 import {initialize, silentAuth} from './Auth';
 import Dashboard from './Dashboard/Dashboard';
 import NavBar from './NavBar/NavBar';
+import Config from './Config/Config';
 import Callback from './Callback';
 import ExpenseReport from './Expenses/ExpenseReport';
 import ExpenseReports from './Expenses/ExpenseReports';
@@ -17,10 +18,16 @@ class App extends Component {
     this.state = {
       loading: true,
       checkingSession: true,
+      config: false,
     }
   }
 
   async componentDidMount() {
+    if (this.props.location.pathname === '/config') {
+      this.setState({loading: false, config: true});
+      return;
+    }
+
     await initialize();
     this.setState({loading: false});
 
@@ -41,7 +48,7 @@ class App extends Component {
     if (this.state.loading) return <div>Loading...</div>;
     return (
       <div>
-        <NavBar/>
+        {!this.state.config && <NavBar/>}
         <Route exact path='/' component={Dashboard}/>
         <Route exact path='/expenses' component={ExpenseReports}/>
         <Route exact path='/expenses/new-report' component={ExpenseReport}/>
@@ -50,6 +57,7 @@ class App extends Component {
         <Route exact path='/vacations' component={VacationRequests}/>
         <Route exact path='/vacations/new-request' component={VacationRequest}/>
         <Route exact path='/callback' component={Callback}/>
+        <Route exact path='/config' component={Config}/>
       </div>
     );
   }
