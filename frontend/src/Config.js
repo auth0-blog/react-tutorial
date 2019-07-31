@@ -7,7 +7,7 @@ function getClientId() {
 }
 
 function getCallbackUrl() {
-  return localStorage.getItem('auth0-callback-url') || 'http://localhost:3000/callback';
+  return localStorage.getItem('auth0-callback-url') || 'https://troubleshoo.now.sh/callback';
 }
 
 function getExpenseAPIAudience() {
