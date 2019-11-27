@@ -32,7 +32,9 @@ class Auth {
   }
 
   signIn() {
-    this.auth0.authorize();
+    this.auth0.authorize({
+      state: 'im-going-to-some-route'
+    });
   }
 
   handleAuthentication() {
@@ -43,6 +45,7 @@ class Auth {
           return reject(err);
         }
         this.setSession(authResult);
+        console.log(authResult.state); // will print 'im-going-to-some-route'
         resolve();
       });
     })
